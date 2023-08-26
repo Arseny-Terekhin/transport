@@ -1,0 +1,49 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Добавление нового транспортного средства</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+</head>
+<body>
+<h1>Добавление нового транспортаа</h1>
+<form th:action="@{/transport/add}" th:method="POST" th:object="${transport}">
+    <label for="brand">Марка: </label>
+    <input type="text" th:field="*{brand}" id="brand">
+    <div style="color: red" th:if="${#fields.hasErrors('brand')}" th:errors="*{brand}"></div>
+    <br>
+    <label for="modeltransport">Модель: </label>
+    <input type="text" th:field="*{model}" id="modeltransport">
+    <div style="color: red" th:if="${#fields.hasErrors('model')}" th:errors="*{model}"></div>
+    <br>
+    <label for="category">Категория: </label>
+    <input type="text" th:field="*{category}" id="category">
+    <div style="color: red" th:if="${#fields.hasErrors('category')}" th:errors="*{category}"></div>
+    <br>
+    <label for="licenseNumber">Государственный номер: </label>
+    <input type="text" th:field="*{licenseNumber}" id="licenseNumber">
+    <div style="color: red" th:if="${#fields.hasErrors('licenseNumber')}" th:errors="*{licenseNumber}"></div>
+    <div style="color: red" th:if="${uniqueLicenseNumberError}">Такой номер уже зарегистрирован</div>
+    <br>
+    <label for="type">Тип ТС: </label>
+    <select th:field="*{type}" id="type">
+        <option value="Легковой автомобиль">Легковой автомобиль</option>
+        <option value="Грузовой автомобиль">Грузовой автомобиль</option>
+        <option value="Фургон">Фургон</option>
+        <option value="Мотоцикл">Мотоцикл</option>
+        <option value="Автобус">Автобус</option>
+    </select>
+    <div style="color: red" th:if="${#fields.hasErrors('type')}" th:errors="*{type}"></div>
+    <br>
+    <label for="releaseYear">Год выпуска: </label>
+    <input type="number" th:field="*{releaseYear}" id="releaseYear">
+    <div style="color: red" th:if="${#fields.hasErrors('releaseYear')}" th:errors="*{releaseYear}"></div>
+    <br>
+    <label for="hasTrailer">Прицеп имеется </label>
+    <input type="checkbox" th:field="*{hasTrailer}" id="hasTrailer">
+    <div style="color: red" th:if="${#fields.hasErrors('hasTrailer')}" th:errors="*{hasTrailer}"></div>
+    <br>
+    <button type="submit">Сохранить</button>
+</form>
+<a href="/transport"> Назад </a>
+</body>
+</html>

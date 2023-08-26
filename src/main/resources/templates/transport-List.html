@@ -1,0 +1,53 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Список транспортных средств</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+</head>
+<body>
+<h1 >Справочник для транспорта</h1>
+<table>
+    <thead>
+    <tr><th>Марка</th>
+        <th>Модель Транспорта</th>
+        <th>Категория Транспорта</th>
+        <th>Государственный номер</th>
+        <th>Тип</th>
+        <th>Год выпуска</th>
+        <th>Прицеп</th></tr>
+    </thead>
+    <tbody>
+    <tr th:each="transport : ${transportList}">
+        <td><span th:text="${transport.brand}"></span></td>
+        <td><span th:text="${transport.model}"></span></td>
+        <td><span th:text="${transport.category}"></span></td>
+        <td><span th:text="${transport.licenseNumber}"></span></td>
+        <td><span th:text="${transport.type}"></span></td>
+        <td><span th:text="${transport.releaseYear}"></span></td>
+        <td>
+            <span th:if="${transport.hasTrailer}" th:text="'имеется'"></span>
+            <span th:unless="${transport.hasTrailer}" th:text="'не имеется'"></span>
+        </td>
+        </td>
+    </tr>
+    </tbody>
+</table>
+<form th:method="GET" th:action="@{/transport}">
+    <label for="brand">Марка: </label>
+    <input type="text" id="brand" name="brand">
+    <label for="model">Модель: </label>
+    <input type="text" id="model" name="model">
+    <br>
+    <label for="category">Категория: </label>
+    <input type="text" id="category" name="category">
+    <label for="licenseNumber">Государственный номер: </label>
+    <input type="text" id="licenseNumber" name="licenseNumber">
+    <br>
+    <label for="releaseYear">Год выпуска: </label>
+    <input type="text" id="releaseYear" name="releaseYear">
+    <br>
+    <button type="submit">Поиск</button>
+    <a href="/transport/add"> Добавить транспортное средство </a>
+</form>
+</body>
+</html>
